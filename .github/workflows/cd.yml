@@ -32,3 +32,5 @@ jobs:
           version: '>= 363.0.0'
       - name: push image
         run: gcloud builds submit --tag europe-west10-docker.pkg.dev/rational-text-457112-j7/notely-ar-repo/jtm-notely:latest .
+      - name: Deploy to Cloud Run
+        run: gcloud run deploy notely --image europe-west10-docker.pkg.dev/rational-text-457112-j7/notely-ar-repo/jtm-notely:latest --region europe-west10 --allow-unauthenticated --project rational-text-457112-j7 --max-instances=4
