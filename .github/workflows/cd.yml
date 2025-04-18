@@ -22,5 +22,9 @@ jobs:
         run: go install github.com/securego/gosec/v2/cmd/gosec@latest
       - name: go sec
         run: gosec ./...
+      - name: 'Set up Cloud SDK'
+        uses: 'google-github-actions/setup-gcloud@v2'
+        with:
+          version: '>= 363.0.0'
       - name: push image
         run: gcloud builds submit --tag europe-west10-docker.pkg.dev/rational-text-457112-j7/notely-ar-repo/jtm-notely:latest .
