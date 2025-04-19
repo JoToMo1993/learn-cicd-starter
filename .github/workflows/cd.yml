@@ -6,6 +6,8 @@ jobs:
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
+    env:
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
     steps:
       - name: Check out code
@@ -22,6 +24,10 @@ jobs:
         run: go install github.com/securego/gosec/v2/cmd/gosec@latest
       - name: go sec
         run: gosec ./...
+      - name: Install goose
+        run: go install github.com/pressly/goose/v3/cmd/goose@latest
+      - name: goose
+        run: ./scripts/migrateup.sh
       - id: 'auth'
         uses: 'google-github-actions/auth@v2'
         with:
